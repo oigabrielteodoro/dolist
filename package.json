@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/css": "11.5.0",
     "@rescript/react": "0.10.3",
+    "@rescriptbr/ancestor": "0.4.6",
     "@vitejs/plugin-react": "1.0.1",
     "react": "17.0.0",
     "react-dom": "17.0.0",
