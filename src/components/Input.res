@@ -8,7 +8,7 @@ module Styles = {
     "backgroundColor": Theme.Colors.grayDark->colorToString,
     "fontSize": "1.8rem",
     "border": "none",
-    "padding": "1.2rem 1.6rem",
+    "padding": "1.6rem 1.6rem",
     "borderRadius": "0.6rem",
     "outline": "none",
     "width": "100%",

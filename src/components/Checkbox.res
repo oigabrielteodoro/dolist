@@ -32,7 +32,7 @@ module Styles = {
         "position": "absolute",
         "top": "0.5rem",
         "left": "0.3rem",
-        "transform": "scale(1)",
+        "transform": "scale(0)",
       },
       "&:after": {
         "borderRadius": "0.3rem",
