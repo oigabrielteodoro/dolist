@@ -31,6 +31,7 @@ let client = ReactQuery.Provider.createClient()
 let make = () => {
   <ReactQuery.Provider client>
     <Box 
+      overflow=[xs(#auto)]
       p=[xs(4), md(9)] 
       width=[xs(100.0->#pct)] 
       height=[xs(100.0->#pct)] 
