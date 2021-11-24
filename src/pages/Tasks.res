@@ -78,7 +78,7 @@ module EmptyState = {
 
 module TaskItem = {
   @react.component
-  let make = (~name, ~createdAt, ~completed) => {
+  let make = (~name, ~createdAt, ~completed, ~onToggle) => {
     <Box
       mb=[xs(2)]
       px=[xs(2)] 
@@ -110,7 +110,7 @@ module TaskItem = {
           {createdAt->s}
         </Typography>
       </Box>
-      <Checkbox checked=completed />
+      <Checkbox checked=completed onChange={_ => onToggle()} />
     </Box>
   }
 }
@@ -156,7 +156,7 @@ module NewTaskInput = {
 
 @react.component
 let make = () => {
-  let { result, isCreating, taskName, handleChange, handleCreateTask } = useTasks()
+  let { result, isCreating, taskName, toggleTaskStatus, handleChange, handleCreateTask } = useTasks()
 
   <Box 
     display=[xs(#flex)] 
@@ -172,19 +172,28 @@ let make = () => {
       <img src={Assets.logo} alt="Dolist" />
     </Box>
     <Box mt=[xs(10)] width=[xs(100.0->#pct)] maxW=[xs(63.4->#rem)]>
-      <NewTaskInput isLoading=isCreating taskName onChange=handleChange onSubmit=handleCreateTask />
+      <NewTaskInput 
+        isLoading=isCreating 
+        taskName 
+        onChange=handleChange 
+        onSubmit=handleCreateTask 
+      />
+
       {switch result {
       | Loading => <Spinner />
       | Error => <ErrorMessage />
       | Data([]) => <EmptyState />
       | Data(tasks) => {
         <Box mt=[xs(4)]>
-          {tasks->map(({ name, completed, createdAt }, key) => {
+          {tasks->map((task, key) => {
+            let { name, completed, createdAt } = task
+
             <TaskItem 
               key
               name
               completed
               createdAt={createdAt->formatDate}
+              onToggle={_ => toggleTaskStatus(task)}
             />
           })}
         </Box>

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Compras da semana",
-      "completed": false,
+      "completed": true,
       "createdAt": "2021-10-23T16:52:45.875Z"
     },
     {
@@ -19,22 +19,22 @@
       "createdAt": "2021-10-23T16:52:45.875Z"
     },
     {
+      "id": 4,
       "name": "ir ao mercado",
-      "completed": false,
-      "createdAt": "2021-11-24T14:49:02.158Z",
-      "id": 4
+      "completed": true,
+      "createdAt": "2021-11-24T14:49:02.158Z"
     },
     {
+      "id": 5,
       "name": "Compras do mês",
-      "completed": false,
-      "createdAt": "2021-11-24T14:49:42.780Z",
-      "id": 5
+      "completed": true,
+      "createdAt": "2021-11-24T14:49:42.780Z"
     },
     {
+      "id": 6,
       "name": "teste",
-      "completed": false,
-      "createdAt": "2021-11-24T14:49:50.645Z",
-      "id": 6
+      "completed": true,
+      "createdAt": "2021-11-24T14:49:50.645Z"
     }
   ]
 }
