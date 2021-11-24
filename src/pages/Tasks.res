@@ -5,10 +5,6 @@ let { useTasks } = module(TasksHook)
 
 let formatDate = (value) => value->Js.Date.fromString->DateFns.format("dd/MM/yy hh:mm")
 
-@module("../assets/logo.svg") external logo: string = "default"
-@module("../assets/empty-state.svg") external emptyState: string = "default"
-@module("../assets/spinner.svg") external spinner: string = "default"
-
 module ErrorMessage = {
   @react.component
   let make = () => {
@@ -54,7 +50,7 @@ module EmptyState = {
       alignItems=[xs(#center)] 
       justifyContent=[xs(#center)]
     >
-      <Base tag=#img mb=[xs(3)] src=emptyState alt="Empty state" width=[xs(200->#px)] />
+      <Base tag=#img mb=[xs(3)] src=Assets.emptyState alt="Empty state" width=[xs(200->#px)] />
       <Typography 
         tag=#h1
         m=[xs(0)]
@@ -129,7 +125,7 @@ module Spinner = {
       justifyContent=[xs(#center)]
       alignItems=[xs(#center)]
     >
-      <Base tag=#img src=spinner width=[xs(5.6->#rem)] />
+      <Base tag=#img src=Assets.spinner width=[xs(5.6->#rem)] />
     </Box>
   }
 }
@@ -173,7 +169,7 @@ let make = () => {
       justifyContent=[xs(#center)]
       tag=#header
     >
-      <img src={logo} alt="Dolist" />
+      <img src={Assets.logo} alt="Dolist" />
     </Box>
     <Box mt=[xs(10)] width=[xs(100.0->#pct)] maxW=[xs(63.4->#rem)]>
       <NewTaskInput />
