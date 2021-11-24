@@ -3,6 +3,8 @@ open Ancestor.Default
 
 let { useTasks } = module(TasksHook)
 
+let formatDate = (value) => value->Js.Date.fromString->DateFns.format("dd/MM/yy hh:mm")
+
 @module("../assets/logo.svg") external logo: string = "default"
 @module("../assets/empty-state.svg") external emptyState: string = "default"
 
@@ -135,7 +137,7 @@ let make = () => {
               key
               name
               completed
-              createdAt
+              createdAt={createdAt->formatDate}
             />
           })}
         </Box>
