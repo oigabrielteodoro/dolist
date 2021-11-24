@@ -862,6 +862,11 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@ryyppy/rescript-promise@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ryyppy/rescript-promise/-/rescript-promise-2.1.0.tgz#a33861274c41360cfbe872cf489f3dcb8dd526e6"
+  integrity sha512-+dW6msBrj2Lr2hbEMX+HoWCvN89qVjl94RwbYWJgHQuj8jm/izdPC0YzxgpGoEFdeAEW2sOozoLcYHxT6o5WXQ==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -1575,6 +1580,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns@2.26.0:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.26.0.tgz#fa45305543c392c4f914e50775fd2a4461e60fbd"
+  integrity sha512-VQI812dRi3cusdY/fhoBKvc6l2W8BPWU1FNVnFH9Nttjx4AFBRzfSVb/Eyc7jBT6e9sg1XtAGsYpBQ6c/jygbg==
 
 debug@*, debug@4, debug@^4.1.1:
   version "4.3.2"

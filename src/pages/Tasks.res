@@ -1,6 +1,8 @@
 open Render
 open Ancestor.Default
 
+let { useTasks } = module(TasksHook)
+
 @module("../assets/logo.svg") external logo: string = "default"
 @module("../assets/empty-state.svg") external emptyState: string = "default"
 
@@ -105,6 +107,8 @@ module NewTaskInput = {
 
 @react.component
 let make = () => {
+  let result = useTasks()
+
   <Box 
     display=[xs(#flex)] 
     flexDirection=[xs(#column)] 
@@ -120,19 +124,23 @@ let make = () => {
     </Box>
     <Box mt=[xs(10)] width=[xs(100.0->#pct)] maxW=[xs(63.4->#rem)]>
       <NewTaskInput />
-      <EmptyState />
-      // <Box mt=[xs(4)]>
-        // <TaskItem 
-        //   name="Lorem ipsum dolor sit amet" 
-        //   createdAt="11/10/2021 as 19h53m" 
-        //   completed=false 
-        // />
-        // <TaskItem 
-        //   name="Lorem ipsum dolor sit amet" 
-        //   createdAt="11/10/2021 as 19h53m" 
-        //   completed=false 
-        // />
-      // </Box>
+      {switch result {
+      | Loading => "Loading..."->s
+      | Error => "Error :("->s
+      | Data([]) => <EmptyState />
+      | Data(tasks) => {
+        <Box mt=[xs(4)]>
+          {tasks->map(({ name, completed, createdAt }, key) => {
+            <TaskItem 
+              key
+              name
+              completed
+              createdAt
+            />
+          })}
+        </Box>
+      }
+      }}
     </Box>
   </Box>
 }
