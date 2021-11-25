@@ -3,24 +3,24 @@
 module Styles = {
   open Emotion
 
-  let { toString: colorToString } = module(Theme.Colors)
+  let {toString: colorToString} = module(Theme.Colors)
 
   let fillAnimation = keyframes({
     "0%": {
-      "transform": "scale(0)"
+      "transform": "scale(0)",
     },
     "50%": {
       "transform": "scale(1.25)",
     },
     "100%": {
-      "transform": "scale(1)"
-    }
+      "transform": "scale(1)",
+    },
   })
 
   let checkboxWrapper = css({
     "cursor": "pointer",
     "> input": {
-      "display": "none"
+      "display": "none",
     },
     "> div": {
       "position": "relative",
@@ -50,21 +50,18 @@ module Styles = {
       "> img": {
         "zIndex": 10,
         "animation": `${fillAnimation} 300ms forwards`,
-        "animationDelay": "100ms"
+        "animationDelay": "100ms",
       },
       "&:after": {
         "animation": `${fillAnimation} 300ms forwards`,
-      }
-    }
+      },
+    },
   })
 }
 
 @react.component
 let make = (~checked=?, ~onChange=?) => {
   <label className=Styles.checkboxWrapper>
-    <input ?checked ?onChange type_="checkbox" />
-    <div>
-      <img src={checkIcon} />
-    </div>
+    <input ?checked ?onChange type_="checkbox" /> <div> <img src={checkIcon} /> </div>
   </label>
 }

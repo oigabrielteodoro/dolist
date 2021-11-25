@@ -11,9 +11,10 @@ module Colors = {
   let black = #hex("#070707")
   let white = #hex("#ffffff")
 
-  let toString = color => switch color {
-  | #hex(color) => color
-  }
+  let toString = color =>
+    switch color {
+    | #hex(color) => color
+    }
 }
 
 module Constants = {

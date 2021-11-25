@@ -1,7 +1,7 @@
 module Styles = {
   open Emotion
 
-  let { toString: colorToString } = module(Theme.Colors)
+  let {toString: colorToString} = module(Theme.Colors)
 
   let input = css({
     "color": Theme.Colors.white->colorToString,
@@ -19,7 +19,7 @@ module Styles = {
     "&:focus": {
       "transition": "300ms",
       "boxShadow": `0 0 0 0.2rem ${Theme.Colors.primary->colorToString}`,
-    }
+    },
   })
 }
 

@@ -1,9 +1,11 @@
-let { queryOptions, mutationOptions, useQuery, useMutation } = module(ReactQuery)
+module Array = Js.Array2
+
+let {queryOptions, mutationOptions, useQuery, useMutation} = module(ReactQuery)
 
 let apiUrl = "http://localhost:3001"
 let apiCodec = Jzon.array(TaskTypes.codec)
 
-type requestResult = 
+type requestResult =
   | Data(array<TaskTypes.t>)
   | Loading
   | Error
@@ -20,7 +22,7 @@ type hookResult = {
 let handleFetch = _ => {
   open Promise
 
-  Fetch.fetch(`${apiUrl}/tasks`, { "method": "GET" })
+  Fetch.fetch(`${apiUrl}/tasks`, {"method": "GET"})
   ->then(response => response->Fetch.json)
   ->thenResolve(json => Jzon.decodeWith(json, apiCodec))
 }
@@ -33,12 +35,12 @@ let handleCreateTask = (taskName: string) => {
   }
 
   Fetch.fetch(
-    `${apiUrl}/tasks`, 
+    `${apiUrl}/tasks`,
     {
       "method": "POST",
       "body": Js.Json.stringifyAny(newTask),
       "headers": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     },
   )
@@ -55,9 +57,9 @@ let handleUpdateTask = task => {
       "method": "PUT",
       "body": json,
       "headers": {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-    }
+    },
   )->thenResolve(response => Js.log(response))
 }
 
@@ -69,8 +71,8 @@ let useTasks = () => {
       ~queryKey="tasks",
       ~queryFn=handleFetch,
       ~refetchOnWindowFocus=ReactQuery.refetchOnWindowFocus(#bool(false)),
-      ()
-    )
+      (),
+    ),
   )
 
   let refetchTasks = () => {
@@ -85,22 +87,22 @@ let useTasks = () => {
     refetchTasks()
   }
 
-  let { mutate: createTaskMutation, isLoading: isCreating } = useMutation(
+  let {mutate: createTaskMutation, isLoading: isCreating} = useMutation(
     mutationOptions(
       ~onSuccess=handleSuccess,
       ~mutationFn=handleCreateTask,
       ~mutationKey="new-task",
       (),
-    )
+    ),
   )
 
-  let { mutate: updateTaskMutation } = useMutation(
+  let {mutate: updateTaskMutation} = useMutation(
     mutationOptions(
       ~onSuccess=(_, _, _) => refetchTasks(),
       ~mutationFn=handleUpdateTask,
       ~mutationKey="update-task",
       (),
-    )
+    ),
   )
 
   let handleChange = event => {
@@ -125,17 +127,23 @@ let useTasks = () => {
   }
 
   {
-    isCreating,
-    taskName,
-    handleChange,
-    handleCreateTask,
-    toggleTaskStatus,
+    isCreating: isCreating,
+    taskName: taskName,
+    handleChange: handleChange,
+    handleCreateTask: handleCreateTask,
+    toggleTaskStatus: toggleTaskStatus,
     result: switch result {
-    | { isLoading: true } => Loading
-    | { isError: true }
-    | { data: Some(Error(_)) } => Error
-    | { data: Some(Ok(tasks)), isLoading: false, isError: false } => Data(tasks)
+    | {isLoading: true} => Loading
+    | {isError: true}
+    | {data: Some(Error(_))} =>
+      Error
+    | {data: Some(Ok(tasks)), isLoading: false, isError: false} =>
+      Data(
+        tasks->Js.Array2.sortInPlaceWith((a, b) =>
+          DateFns.compareDesc(a.createdAt->Js.Date.fromString, b.createdAt->Js.Date.fromString)
+        ),
+      )
     | _ => Error
-    }
+    },
   }
 }
