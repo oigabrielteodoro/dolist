@@ -35,38 +35,10 @@ module Styles = {
       "opacity": "0.8",
     },
   })
-
-  let confirmButton = css({
-    "color": Theme.Colors.white->colorToString,
-    "background": Theme.Colors.primary->colorToString,
-    "borderRadius": "0.4rem",
-    "padding": "1.6rem",
-    "width": "100%",
-    "border": "0",
-    "fontSize": "1.6rem",
-    "fontWeight": "500",
-    "marginTop": "2.0rem",
-    "transition": "300ms",
-    "&:hover": {
-      "opacity": "0.8",
-    },
-  })
-
-  let cancelButton = css({
-    "background": "transparent",
-    "border": "0",
-    "fontWeight": "bold",
-    "color": Theme.Colors.grayLight->colorToString,
-    "margin": "1.6rem auto 0",
-    "transition": "300ms",
-    "&:hover": {
-      "opacity": "0.8",
-    },
-  })
 }
 
 @react.component
-let make = (~name, ~createdAt, ~completed, ~onToggle) => {
+let make = (~id, ~name, ~createdAt, ~completed, ~onToggle) => {
   let (isOpen, setIsOpen) = React.useState(_ => false)
 
   let toggleConfirm = _ => {
@@ -120,27 +92,7 @@ let make = (~name, ~createdAt, ~completed, ~onToggle) => {
       </button>
     </Box>
     {switch isOpen {
-    | true =>
-      <Modal title="Excluir tarefa" onClose={toggleConfirm}>
-        <Box
-          display=[xs(#flex)]
-          alignItems=[xs(#center)]
-          justifyContent=[xs(#center)]
-          flexDirection=[xs(#column)]
-          textAlign=[xs(#center)]>
-          <Typography
-            color=[xs(Theme.Colors.grayLight)] fontSize=[xs(1.6->#rem)] fontWeight=[xs(#500)]>
-            {"Deseja excluir esta tarefa?"->s}
-          </Typography>
-          <Typography color=[xs(Theme.Colors.grayLight)] fontSize=[xs(1.4->#rem)] mt=[xs(1)]>
-            {"Caso voce exclua a tarefa, nao sera possivel restaura-la!"->s}
-          </Typography>
-        </Box>
-        <button className=Styles.confirmButton> {"Excluir!"->s} </button>
-        <button className=Styles.cancelButton onClick={_ => toggleConfirm()}>
-          {"Cancelar"->s}
-        </button>
-      </Modal>
+    | true => <DeleteTask taskId=id onClose=toggleConfirm />
     | false => React.null
     }}
   </>

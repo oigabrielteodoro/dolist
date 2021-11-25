@@ -130,10 +130,11 @@ let make = () => {
       | Data(tasks) =>
         <Box mt=[xs(4)]>
           {tasks->map((task, key) => {
-            let {name, completed, createdAt} = task
+            let {id, name, completed, createdAt} = task
 
             <TaskItem
               key
+              id
               name
               completed
               createdAt={createdAt->formatDate}

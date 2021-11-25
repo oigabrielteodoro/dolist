@@ -6,6 +6,15 @@ module Styles = {
 
   let {toString: colorToString} = module(Theme.Colors)
 
+  let fadeIn = keyframes({
+    "0%": {
+      "opacity": "0",
+    },
+    "100%": {
+      "opacity": "1",
+    },
+  })
+
   let overlay = css({
     "background": "#00000050",
     "position": "fixed",
@@ -26,6 +35,7 @@ module Styles = {
     "background": Theme.Colors.grayDark->colorToString,
     "borderRadius": "0.6rem",
     "padding": "2.8rem",
+    "animation": `${fadeIn} 1s`,
   })
 
   let closeButton = css({

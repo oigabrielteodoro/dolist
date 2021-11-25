@@ -1,7 +1,10 @@
+open ReactToastify
 open Ancestor.Default
 
+%%raw("import 'react-toastify/dist/ReactToastify.css'")
+
 Emotion.injectGlobal({
-  "html": {
+  "html": { 
     "fontSize": "10px",
   },
   "html, body, #root": {
@@ -36,7 +39,11 @@ let make = () => {
       width=[xs(100.0->#pct)]
       height=[xs(100.0->#pct)]
       bgColor=[xs(Theme.Colors.black)]>
-      <Tasks />
+      <TaskContext.Provider>
+        <Tasks />
+      </TaskContext.Provider>
     </Box>
+
+    <ToastContainer autoClose=3000 position=#topRight />
   </ReactQuery.Provider>
 }
